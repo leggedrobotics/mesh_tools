@@ -751,6 +751,11 @@ void MeshDisplay::processMessage(const mesh_msgs::MeshGeometryStamped::ConstPtr&
     return;
   }
 
+  if (meshMsg->mesh_geometry.vertices.size() == 0){
+    ROS_ERROR("Received mesh is empty!");
+    return;
+  }
+
   if (!m_lastUuid.empty() && meshMsg->uuid.compare(m_lastUuid) != 0)
   {
     ROS_WARN("Received geometry with new UUID!");
